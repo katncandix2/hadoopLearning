@@ -52,7 +52,7 @@ public class UseSort {
 
 
         job.setMapOutputKeyClass(LogBean.class);
-        job.setOutputValueClass(NullWritable.class);
+        job.setMapOutputValueClass(NullWritable.class);
 
         //设置reducer 输出 k-v 格式
         job.setOutputKeyClass(LogBean.class);
@@ -61,6 +61,7 @@ public class UseSort {
         //指定input 文件路径
         FileInputFormat.setInputPaths(job,new Path(args[0]));
         FileOutputFormat.setOutputPath(job,new Path(args[1]));
+
         job.waitForCompletion(true);
 
     }
