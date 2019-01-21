@@ -14,6 +14,10 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import java.io.IOException;
 
+/**
+ * 1. 继承Partitioner  重写getPartition 方法
+ * 2. 设置reduce 任务数量
+ */
 public class AreaGroup {
 
     public static class AreaMapper extends Mapper<LongWritable, Text, Text, LogBean> {
