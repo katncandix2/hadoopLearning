@@ -1,6 +1,8 @@
 package guruiqin.hdfs.useSort;
 
 import guruiqin.hdfs.logAnalysis.LogBean;
+import guruiqin.hdfs.logAnalysis.LogMapper;
+import guruiqin.hdfs.logAnalysis.LogReducer;
 import org.apache.commons.lang.StringUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -22,7 +24,7 @@ public class UseSort {
         @Override
         protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
 
-            String line = key.toString();
+            String line = value.toString();
 
             String []fileds = StringUtils.split(line,' ');
 
@@ -31,7 +33,6 @@ public class UseSort {
             long d_flow    = Long.parseLong(fileds[2]);
 
             context.write(new LogBean(phoneNum,up_flow,d_flow),NullWritable.get());
-
         }
     }
 
@@ -50,6 +51,9 @@ public class UseSort {
 
         job.setJarByClass(UseSort.class);
 
+        //当前job 使用的mapper 和 reducer
+        job.setMapperClass(SortMapper.class);
+        job.setReducerClass(SortReducer.class);
 
         job.setMapOutputKeyClass(LogBean.class);
         job.setMapOutputValueClass(NullWritable.class);
