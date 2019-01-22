@@ -1,5 +1,6 @@
 package guruiqin.hdfs.Invertedindex;
 
+import jdk.internal.jline.internal.TestAccessible;
 import org.apache.commons.lang.StringUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -48,7 +49,6 @@ public class InvertedIndexTwo {
 
         }
     }
-
 
     public static void main(String []args) throws IOException, ClassNotFoundException, InterruptedException {
 
