@@ -1,6 +1,5 @@
 package guruiqin.hdfs.Invertedindex;
 
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -11,9 +10,14 @@ import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
-
 import java.io.IOException;
 
+/**
+ * 倒排索引
+ * 步骤2
+ * 将得到的  [word]+[fileName] -> [word-count] ...
+ * 进行汇总  得到 [word] + {[fileName1],[fileName2]...}
+ */
 public class InvertedIndexTwo {
 
     public static class StepTwoMapper extends Mapper<LongWritable, Text,Text,Text> {
@@ -37,7 +41,7 @@ public class InvertedIndexTwo {
             String line = "";
 
             for (Text s:values){
-                line+= s.toString();
+                line+= s.toString()+"\t";
             }
 
             context.write(key,new Text(line));
